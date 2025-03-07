@@ -10,6 +10,7 @@ namespace Adding_Content
         Texture2D background;
         Texture2D moon;
         Texture2D megaman;
+        Rectangle sourceRectangle = new Rectangle(50, 50, 150, 150);
 
 
         private GraphicsDeviceManager _graphics;
@@ -47,6 +48,7 @@ namespace Adding_Content
         protected override void Update(GameTime gameTime)
         {
 
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -63,7 +65,7 @@ namespace Adding_Content
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             _spriteBatch.Draw(mario, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(megaman, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(megaman, new Vector2(0, 0), sourceRectangle, Color.White);
             _spriteBatch.Draw(moon, new Vector2(0, 0), Color.White);
 
             _spriteBatch.End();
