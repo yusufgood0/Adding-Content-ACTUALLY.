@@ -10,8 +10,12 @@ namespace Adding_Content
         Texture2D background;
         Texture2D moon;
         Texture2D megaman;
-        Rectangle sourceRectangle = new Rectangle(50, 50, 150, 150);
-
+        int megamanFrame = 0;
+        Rectangle megaman_rectangle = new Rectangle(40, 30, 100, 100);
+        Vector2 megamanPosition = new Vector2(100, 700);
+        float moonAngle = 0f;
+        float seconds;
+        SpriteFont titleFont;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -29,6 +33,8 @@ namespace Adding_Content
             _graphics.PreferredBackBufferWidth = 660; // Sets the width of the window
             _graphics.PreferredBackBufferHeight = 880; // Sets the height of the window
             _graphics.ApplyChanges(); // Applies the new dimensions
+            seconds = 0f;
+            titleFont = Content.Load<SpriteFont>("titleFont");
             this.Window.Title = "Adding Things";
             base.Initialize();
         }
@@ -47,11 +53,27 @@ namespace Adding_Content
 
         protected override void Update(GameTime gameTime)
         {
+            seconds += gameTime.ElapsedGameTime.Milliseconds;
+            if (seconds > 500)
+            {
+                megamanPosition.X += 40;
+                if (megamanPosition.X > _graphics.PreferredBackBufferWidth)
+                {
+                    megamanPosition.X -= _graphics.PreferredBackBufferWidth + megaman_rectangle.Width;
+                }
+                megaman_rectangle.X += 120;
+                if (megaman_rectangle.X > 500)
+                {
+                    megaman_rectangle.X = 40;
+                }
+                seconds = 0;
+            }
+            moonAngle += gameTime.ElapsedGameTime.Milliseconds;
 
+            
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
 
 
             // TODO: Add your update logic here
@@ -65,9 +87,9 @@ namespace Adding_Content
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             _spriteBatch.Draw(mario, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(megaman, new Vector2(0, 0), sourceRectangle, Color.White);
-            _spriteBatch.Draw(moon, new Vector2(0, 0), Color.White);
-
+            _spriteBatch.Draw(megaman, megamanPosition, megaman_rectangle, Color.White);
+            _spriteBatch.Draw(moon, new Vector2(100, 100), null, Color.White, moonAngle/100000, new Vector2(moon.Width / 2, moon.Height / 2), 1.0f, SpriteEffects.None, 0f);
+            _spriteBatch.DrawString(titleFont, megamanFrame.ToString(), new Vector2(10, 10), Color.White);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

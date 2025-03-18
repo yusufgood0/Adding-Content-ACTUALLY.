@@ -61,3 +61,10 @@
 /processorParam:TextureFormat=Color
 /build:moon.webp
 
+#begin titleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:titleFont.spritefont
+
