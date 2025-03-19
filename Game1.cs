@@ -12,7 +12,7 @@ namespace Adding_Content
         Texture2D megaman;
         int megamanFrame = 0;
         Rectangle megaman_rectangle = new Rectangle(40, 30, 100, 100);
-        Vector2 megamanPosition = new Vector2(100, 700);
+        Vector2 megamanPosition = new Vector2(100, 645);
         float moonAngle = 0f;
         float seconds;
         SpriteFont titleFont;
@@ -54,7 +54,7 @@ namespace Adding_Content
         protected override void Update(GameTime gameTime)
         {
             seconds += gameTime.ElapsedGameTime.Milliseconds;
-            if (seconds > 500)
+            if (seconds > 250)
             {
                 megamanPosition.X += 40;
                 if (megamanPosition.X > _graphics.PreferredBackBufferWidth)
@@ -86,9 +86,11 @@ namespace Adding_Content
             GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
             _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(mario, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(megaman, megamanPosition, megaman_rectangle, Color.White);
-            _spriteBatch.Draw(moon, new Vector2(100, 100), null, Color.White, moonAngle/100000, new Vector2(moon.Width / 2, moon.Height / 2), 1.0f, SpriteEffects.None, 0f);
+            //_spriteBatch.Draw(megaman, megamanPosition, megaman_rectangle, Color.White);
+
+            _spriteBatch.Draw(mario, new Vector2(10, 550), null, Color.White, 0.5f, new Vector2(0, 0), .27f, SpriteEffects.FlipHorizontally, 0f);
+            _spriteBatch.Draw(megaman, megamanPosition, megaman_rectangle, Color.White, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(moon, new Vector2(100, 100), null, Color.White, moonAngle/100000, new Vector2(moon.Width / 2, moon.Height / 2), 0.75f, SpriteEffects.None, 0f);
             _spriteBatch.DrawString(titleFont, megamanFrame.ToString(), new Vector2(10, 10), Color.White);
             _spriteBatch.End();
             // TODO: Add your drawing code here
